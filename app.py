@@ -12,7 +12,7 @@ import numpy as np
 
 @st.cache_resource
 def load_model():
-    model = tf.keras.models.load_model("/content/drive/MyDrive/Colab Notebooks/Final Project/models/weights-improvement-71-0.88.hdf5") 
+    model = tf.keras.models.load_model("models/weights-improvement-71-0.88.hdf5")
     return model
 
 model = load_model()
