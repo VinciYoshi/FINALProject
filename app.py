@@ -3,42 +3,37 @@
 
 # In[1]:
 
-
 import streamlit as st
-import tensorflow as tf
-import cv2
-from PIL import Image, ImageOps
 import numpy as np
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing.image import img_to_array, load_img
+from PIL import Image
 
-@st.cache_resource
-def load_model():
-    model = tf.keras.models.load_model("models/weights-improvement-71-0.88.hdf5")
-    return model
+model = load_model('/content/drive/MyDrive/Colab Notebooks/Final Project/model.h5')
 
-model = load_model()
+def prepare_image(image, target_size=(128, 128)):
+    if image.mode != "RGB":
+        image = image.convert("RGB")
+    image = image.resize(target_size)
+    image = img_to_array(image)
+    image = np.expand_dims(image, axis=0)
+    image = image / 255.0
+    return image
 
-st.write("""
-# Image Class Predictor
-""")
 
-file = st.file_uploader("Choose an image file", type=['jpg', 'png', 'jpeg'])
+st.title("Image Classification with MobileNet")
+st.write("Upload an image for classification")
 
-def import_and_predict(image_data, model):
-    size = (64, 64) 
-    image = ImageOps.fit(image_data, size, Image.ANTIALIAS)
-    img = np.asarray(image)
-    img = img / 255.0  
-    img_reshape = np.expand_dims(img, axis=0)  
-    prediction = model.predict(img_reshape)
-    return prediction
+uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
-if file is None:
-    st.text("Please upload an image file")
-else:
-    image = Image.open(file)
-    st.image(image, use_column_width=True)
-    prediction = import_and_predict(image, model)
-    class_names = ['Cheetah', 'Lion'] 
-    predicted_class = class_names[np.argmax(prediction)]
-    st.write(f"Predicted Class: {predicted_class}")
-    st.write(f"Prediction Confidence: {np.max(prediction) * 100:.2f}%")
+if uploaded_file is not None:
+    image = Image.open(uploaded_file)
+    st.image(image, caption='Uploaded Image.', use_column_width=True)
+    
+    st.write("Classifying...")
+    prepared_image = prepare_image(image)
+    
+    preds = model.predict(prepared_image)
+    pred_class = np.argmax(preds, axis=1)
+    
+    st.write(f"Predicted Class: {pred_class[0]}")
