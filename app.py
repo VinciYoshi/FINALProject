@@ -1,28 +1,39 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
 import streamlit as st
-from PIL import Image, ImageOps
 import numpy as np
-import tensorflow as tf
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing.image import img_to_array, load_img
+from PIL import Image
 
-def import_and_predict(image_data, model):
-    size = (224, 224)  # Example size, adjust to your model's requirement
-    image = ImageOps.fit(image_data, size, Image.Resampling.LANCZOS)
-    img = np.asarray(image)
-    img = img / 255.0  # Normalize the image
-    img_reshape = img[np.newaxis, ...]
-    prediction = model.predict(img_reshape)
-    return prediction
+model = load_model('model.h5')
 
-# Load your model
-model = tf.keras.models.load_model('model.h5')
+def prepare_image(image, target_size=(128, 128)):
+    if image.mode != "RGB":
+        image = image.convert("RGB")
+    image = image.resize(target_size)
+    image = img_to_array(image)
+    image = np.expand_dims(image, axis=0)
+    image = image / 255.0
+    return image
 
-# Streamlit code to handle file upload and display
-file = st.file_uploader("Please upload an image file", type=["jpg", "png", "jpeg"])
-if file is None:
-    st.text("Please upload an image file")
-else:
-    image = Image.open(file)
-    st.image(image, use_column_width=True)
-    prediction = import_and_predict(image, model)
-    class_names = ['Dog', 'Other']  # Replace with your actual class names
-    string = "OUTPUT : " + class_names[np.argmax(prediction)]
-    st.success(string)
+
+st.title("Image Classification with MobileNet")
+st.write("Upload an image for classification")
+
+uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+
+if uploaded_file is not None:
+    image = Image.open(uploaded_file)
+    st.image(image, caption='Uploaded Image.', use_column_width=True)
+    
+    st.write("Classifying...")
+    prepared_image = prepare_image(image)
+    
+    preds = model.predict(prepared_image)
+    pred_class = np.argmax(preds, axis=1)
+    
+    st.write(f"Predicted Class: {pred_class[0]}")
