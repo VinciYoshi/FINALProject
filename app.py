@@ -15,6 +15,9 @@ if not os.path.exists(model_path):
 
 model = load_model(model_path)
 
+# Print model summary to inspect input shape
+st.text(model.summary())
+
 # Function to prepare image
 def prepare_image(image, target_size=(128, 128)):
     if image.mode != "RGB":
