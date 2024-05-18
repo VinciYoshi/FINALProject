@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 import streamlit as st
 import numpy as np
 from tensorflow.keras.models import load_model
@@ -27,7 +26,7 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="auto") 
 
-background_color = "#f0f0f0"  # Light gray
+background_color = "#8B4513"  # Brown
 st.markdown(
     f"""
     <style>
@@ -54,11 +53,9 @@ if uploaded_file is not None:
     
     prepared_image = prepare_image(image)
     
-
     preds = model.predict(prepared_image)
     pred_class = np.argmax(preds, axis=1)
     
- 
     st.write(f"Predicted Class: {pred_class[0]}")
 
     st.write("Prediction Confidence Scores:")
@@ -66,4 +63,3 @@ if uploaded_file is not None:
         st.write(f"Class {idx}: {score:.4f}")
 else:
     st.write("Please upload an image file to proceed.")
-
