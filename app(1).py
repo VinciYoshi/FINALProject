@@ -25,7 +25,7 @@ st.set_page_config(
     initial_sidebar_state="auto")
 
 # URL of the background image
-background_image_url = "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*V-MNBHTKtawq6oO9c5q00A.png"
+background_image_url = "https://cdn.filtergrade.com/wp-content/uploads/2022/05/07163953/Screenshot-1693.png?_gl=1*ifhv1h*_ga*MTkxNDI2MjQxNC4xNzE2MDM1NTE1*_ga_NG82BG2M3G*MTcxNjAzNTUxNC4xLjAuMTcxNjAzNTUxNC42MC4wLjA.*_gcl_au*MTEyMjk0MDI2Ni4xNzE2MDM1NTE1"
 
 st.markdown(
     f"""
