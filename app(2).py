@@ -10,7 +10,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import img_to_array
 from PIL import Image
 
-model = load_model('/content/drive/MyDrive/Colab Notebooks/Final Project/model.h5')
+model = load_model('model.h5')
 
 def prepare_image(image, target_size=(128, 128)):
     if image.mode != "RGB":
