@@ -22,7 +22,7 @@ def prepare_image(image, target_size=(128, 128)):
     return image
 
 st.set_page_config(
-    page_title="Image Classification with MobileNet",
+    page_title="Image Classification: Lion or Cheetah",
     page_icon=":camera:",
     layout="centered",
     initial_sidebar_state="auto") 
