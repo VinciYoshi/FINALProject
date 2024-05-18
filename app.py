@@ -20,7 +20,7 @@ st.write("Upload an image for classification")
 
 uploaded_file = st.file_uploader("Choose and image...", type=["jpeg", "jpg", "png"])
 
-data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
+data = np.ndarray(shape=(1, 128, 128, 3), dtype=np.float32)
 # Function to prepare image prediction
 def prepare_image_and_predict(image, model):
     image = ImageOps.fit(image, (128,128))
