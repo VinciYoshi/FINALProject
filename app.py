@@ -18,9 +18,8 @@ def prepare_image_and_predict(image, model):
     if image.mode != "RGB":
        image = image.convert("RGB")
     image = np.asarray(image)
-    img_array = np.expand_dims(image, axis=0)
-    img_array /= 255.0
     img_reshape = img_array[np.newaxis, ...]
+    img_reshape /= 255.0
     prediction = model.predict(img_reshape)
     
     return prediction
