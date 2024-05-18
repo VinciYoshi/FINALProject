@@ -33,7 +33,7 @@ if uploaded_file is Not None:
     st.write("Classifying...")
 
     prediction = prepare_image_and_predict(image, model)
-    class_names = ['Cheetah', Lion']
+    class_names = ['Cheetah', 'Lion']
     pred_class = np.argmax(prediction, axis=1)[0]
 
     st.write(f"Image is a {class_names[pred_class]}")
