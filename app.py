@@ -21,19 +21,14 @@ st.write("Upload an image for classification")
 uploaded_file = st.file_uploader("Choose and image...", type=["jpeg", "jpg", "png"])
 
 data = np.ndarray(shape=(1, 128, 128, 3), dtype=np.float32)
-# Function to prepare image prediction
-def prepare_image_and_predict(image, model):
-    image = ImageOps.fit(image, (128,128, Image.Resampling.LANCZOS))
-    #if image.mode != "RGB":
-       #image = image.convert("RGB")
+
+def prepare_image_and_predict(image_data, model):
+    size = (128, 128)
+    image = ImageOps.fit(image_data, size, Image.Resampling.LANCZOS)
     image_array = np.asarray(image)
-    #img_reshape = img_array[np.newaxis, ...]
-    #img_reshape = img_reshape/255.0
-    #prediction = model.predict(img_reshape)
     normalized_image_array = (image_array.astype(np.float32) / 127.5) - 1
     data[0] = normalized_image_array
     prediction = model.predict(data)
-    
     return prediction
 
 if uploaded_file is not None:
