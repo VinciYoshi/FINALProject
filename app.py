@@ -14,7 +14,7 @@ model = load_model(model_path)
 
 # Function to prepare image prediction
 def prepare_image_and_predict(image, model):
-    image = ImageOps.fit(image, (128,128))
+    image = ImageOps.fit(image, (128,128), Image.Resampling.LANCOS)
     if image.mode != "RGB":
        image = image.convert("RGB")
     img_array = np.asarray(image)
