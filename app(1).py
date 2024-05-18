@@ -35,6 +35,10 @@ st.markdown(
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
+        color: black;
+    }}
+    .stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5, .stApp h6, .stApp p, .stApp label, .stApp .caption {{
+        color: black;
     }}
     </style>
     """,
