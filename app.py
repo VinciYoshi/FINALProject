@@ -17,13 +17,13 @@ def prepare_image_and_predict(image, model):
     image = ImageOps.fit(image, (128,128))
     if image.mode != "RGB":
        image = image.convert("RGB")
-    image_array = np.asarray(image)
-    img_reshape = image_array[np.newaxis, ...]
+    img_array = np.asarray(image)
+    img_reshape = img_array[np.newaxis, ...]
     img_reshape /= 255.0
     prediction = model.predict(img_reshape)
     
     return prediction
-
+    
 # Streamlit app
 st.title("Image Classification with MobileNet")
 st.write("Upload an image for classification")
