@@ -7,7 +7,7 @@ from PIL import Image, ImageOps
 import os
 
 # Load model
-model_path = 'model.h5'
+model_path = 'model test.h5'
 if not os.path.exists(model_path):
     raise FileNotFoundError(f"Model file not found at {model_path}")
 
