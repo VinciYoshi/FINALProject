@@ -21,7 +21,7 @@ def prepare_image(image, target_size=(128, 128)):
     image = image / 255.0
     return image
 
-st.title("Image Classification with MobileNet")
+st.title("Image Classification: Lion or Cheetah")
 st.write("Upload an image for classification")
 
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
