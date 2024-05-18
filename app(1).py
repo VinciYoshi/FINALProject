@@ -24,15 +24,17 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="auto")
 
-background_color = "#8B4513"  # Brown
+# URL of the background image
+background_image_url = "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*V-MNBHTKtawq6oO9c5q00A.png"
+
 st.markdown(
     f"""
     <style>
-    .reportview-container .main {{
-        background-color: {background_color};
-    }}
     .stApp {{
-        background-color: {background_color};
+        background: url({background_image_url});
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
     }}
     </style>
     """,
