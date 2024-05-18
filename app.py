@@ -23,7 +23,7 @@ uploaded_file = st.file_uploader("Choose and image...", type=["jpeg", "jpg", "pn
 data = np.ndarray(shape=(1, 128, 128, 3), dtype=np.float32)
 # Function to prepare image prediction
 def prepare_image_and_predict(image, model):
-    image = ImageOps.fit(image, (128,128))
+    image = ImageOps.fit(image, (128,128, Image.Resampling.LANCZOS))
     #if image.mode != "RGB":
        #image = image.convert("RGB")
     image_array = np.asarray(image)
