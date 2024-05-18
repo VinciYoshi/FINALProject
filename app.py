@@ -7,21 +7,11 @@ from PIL import Image, ImageOps
 import os
 
 # Load model
-#model_path = 'model.h5'
-#if not os.path.exists(model_path):
-    #raise FileNotFoundError(f"Model file not found at {model_path}")
+model_path = 'model.h5'
+if not os.path.exists(model_path):
+    raise FileNotFoundError(f"Model file not found at {model_path}")
 
-#model = load_model(model_path)
-
-st.set_option('deprecation.showfileUploaderEncoding', False)
-
-@st.cache_resource
-def load_model():
-    model = tf.keras.models.load_model('model.h5')
-    return model
-
-with st.spinner('Model is being loaded..'):
-    model = load_model()
+model = load_model(model_path)
 
 # Function to prepare image prediction
 def prepare_image_and_predict(image, model):
@@ -29,9 +19,12 @@ def prepare_image_and_predict(image, model):
     if image.mode != "RGB":
        image = image.convert("RGB")
     img_array = np.asarray(image)
-    img_reshape = img_array[np.newaxis, ...]
-    img_reshape = img_reshape/255.0
-    prediction = model.predict(img_reshape)
+    #img_reshape = img_array[np.newaxis, ...]
+    #img_reshape = img_reshape/255.0
+    #prediction = model.predict(img_reshape)
+    normalized_image_array = (image_array.astype(np.float32) / 127.5) - 1
+    data[0] = normalized_image_array
+    prediction = model.predict(data)
     
     return prediction
     
