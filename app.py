@@ -19,7 +19,7 @@ model = load_model(model_path)
 st.text(model.summary())
 
 # Function to prepare image
-def prepare_image(image, target_size=(128, 128)):
+def prepare_image(image, target_size=(224, 224)):
     if image.mode != "RGB":
         image = image.convert("RGB")
     image = image.resize(target_size)
