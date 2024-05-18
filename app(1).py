@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
 import streamlit as st
 import numpy as np
 from tensorflow.keras.models import load_model
@@ -24,13 +22,16 @@ st.set_page_config(
     page_title="Image Classification: Lion or Cheetah",
     page_icon=":camera:",
     layout="centered",
-    initial_sidebar_state="auto") 
+    initial_sidebar_state="auto")
 
 background_color = "#8B4513"  # Brown
 st.markdown(
     f"""
     <style>
-    .reportview-container {{
+    .reportview-container .main {{
+        background-color: {background_color};
+    }}
+    .stApp {{
         background-color: {background_color};
     }}
     </style>
