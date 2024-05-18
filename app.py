@@ -14,7 +14,7 @@ model = load_model(model_path)
 
 # Function to prepare image prediction
 def prepare_image_and_predict(image, model):
-    image = load_img(image_data, target_size=(150, 150))
+    image = load_img(image, target_size=(150, 150))
     if image.mode != "RGB":
        image = image.convert("RGB")
     image = np.asarray(image)
