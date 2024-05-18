@@ -39,7 +39,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.title("Image Classification with MobileNet")
+st.title("Image Classification: Lion or Cheetah")
 st.write("Upload an image for classification")
 
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
