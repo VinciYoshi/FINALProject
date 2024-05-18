@@ -6,11 +6,21 @@ from PIL import Image, ImageOps
 import os
 
 # Load model
-model_path = 'model.h5'
-if not os.path.exists(model_path):
-    raise FileNotFoundError(f"Model file not found at {model_path}")
+#model_path = 'model.h5'
+#if not os.path.exists(model_path):
+    #raise FileNotFoundError(f"Model file not found at {model_path}")
 
-model = load_model(model_path)
+#model = load_model(model_path)
+
+st.set_option('deprecation.showfileUploaderEncoding', False)
+
+@st.cache_resource
+def load_model():
+    model = tf.keras.models.load_model('model.h5')
+    return model
+
+with st.spinner('Model is being loaded..'):
+    model = load_model()
 
 # Function to prepare image prediction
 def prepare_image_and_predict(image, model):
