@@ -13,11 +13,19 @@ if not os.path.exists(model_path):
 
 model = load_model(model_path)
 
+    
+# Streamlit app
+st.title("Image Classification with MobileNet")
+st.write("Upload an image for classification")
+
+uploaded_file = st.file_uploader("Choose and image...", type=["jpeg", "jpg", "png"])
+
+data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 # Function to prepare image prediction
 def prepare_image_and_predict(image, model):
     image = ImageOps.fit(image, (128,128))
-    if image.mode != "RGB":
-       image = image.convert("RGB")
+    #if image.mode != "RGB":
+       #image = image.convert("RGB")
     image_array = np.asarray(image)
     #img_reshape = img_array[np.newaxis, ...]
     #img_reshape = img_reshape/255.0
@@ -27,13 +35,6 @@ def prepare_image_and_predict(image, model):
     prediction = model.predict(data)
     
     return prediction
-    
-# Streamlit app
-st.title("Image Classification with MobileNet")
-st.write("Upload an image for classification")
-
-uploaded_file = st.file_uploader("Choose and image...", type=["jpeg", "jpg", "png"])
-
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
