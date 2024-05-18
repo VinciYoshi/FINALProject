@@ -19,7 +19,7 @@ def prepare_image_and_predict(image, model):
        image = image.convert("RGB")
     img_array = np.asarray(image)
     img_reshape = img_array[np.newaxis, ...]
-    img_reshape /= 255.0
+    img_reshape = img_reshape/255.0
     prediction = model.predict(img_reshape)
     
     return prediction
