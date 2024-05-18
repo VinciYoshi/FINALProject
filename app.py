@@ -32,7 +32,7 @@ st.write("Upload an image for classification")
 uploaded_file = st.file_uploader("Choose and image...", type=["jpeg", "jpg", "png"])
 
 
-if uploaded_file is Not None:
+if uploaded_file is not None:
     image = Image.open(file)
     st.image(image, caption='Uploaded Image', use_column_width=True)
     st.write("Classifying...")
