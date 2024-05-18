@@ -13,7 +13,7 @@ def import_and_predict(image_data, model):
     return prediction
 
 # Load your model
-model = tf.keras.models.load_model('path/to/your/model')
+model = tf.keras.models.load_model('model.h5')
 
 # Streamlit code to handle file upload and display
 file = st.file_uploader("Please upload an image file", type=["jpg", "png", "jpeg"])
