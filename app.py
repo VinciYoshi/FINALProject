@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import img_to_array, load_img
-from PIL import Image
+from PIL import Image, ImageOps
 import os
 
 # Load model
@@ -14,7 +14,7 @@ model = load_model(model_path)
 
 # Function to prepare image prediction
 def prepare_image_and_predict(image, model):
-    image = load_img(image, target_size=(150, 150))
+    image = ImageOps.fit(image, (128,128))
     if image.mode != "RGB":
        image = image.convert("RGB")
     image = np.asarray(image)
